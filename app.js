@@ -54,7 +54,7 @@ app.listen(3000, () => {
         fs.mkdirSync("uploads");
       }
       
-      if (!fs.existsSync("processed")) {
+      if (!fs.existsSync("mini")) {
         fs.mkdirSync("mini");
       }
   console.log("Serveur lancé sur le port 3000");

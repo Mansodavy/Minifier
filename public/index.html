@@ -4,17 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minificateur de fichiers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>Glissez et déposez vos fichiers HTML, CSS et JavaScript pour les minifier</h1>
+<body class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen">
+  <nav class="bg-white shadow-md py-4 px-6">
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold text-blue-600">File Minifier</h1>
+      </div>
+    </div>
+  </nav>
 
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" id="file" required>
-    <button type="submit">Minifier le fichier</button>
-  </form>
-
+  <div class="container mx-auto p-4">
+    <h2 class="text-4xl font-bold mb-6 text-center text-white">Glissez vos fichiers HTML, CSS et JavaScript pour les minifier</h2>
+    <div class="bg-white shadow-md rounded p-6 mx-auto w-full md:w-1/2">
+      <form action="/upload" method="post" enctype="multipart/form-data" class="flex flex-col items-center">
+        <input type="file" name="file" id="file" class="opacity-0 absolute" required>
+        <div id="dropzone" class="w-full h-60 flex flex-col justify-center items-center bg-gray-100 rounded border-dashed border-2 border-gray-300 mb-4">
+          <p class="text-gray-500">Glissez un fichier ici</p>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700">Minifier le fichier</button>
+      </form>
+    </div>
+  </div>
+  
   <script>
     const fileInput = document.getElementById("file");
+    const dropzone = document.getElementById("dropzone");
 
     document.body.addEventListener("dragover", (e) => {
       e.preventDefault();
@@ -25,9 +41,17 @@
       const files = e.dataTransfer.files;
       if (files.length > 0) {
         fileInput.files = files;
+        dropzone.classList.add("bg-green-200", "border-green-500");
+      }
+    });
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length > 0) {
+        dropzone.classList.add("bg-green-200", "border-green-500");
+      } else {
+        dropzone.classList.remove("bg-green-200", "border-green-500");
       }
     });
   </script>
 </body>
 </html>
-
