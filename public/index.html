@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minificateur de fichiers</title>
+</head>
+<body>
+  <h1>Glissez et déposez vos fichiers HTML, CSS et JavaScript pour les minifier</h1>
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="file" required>
+    <button type="submit">Minifier le fichier</button>
+  </form>
+
+  <script>
+    const fileInput = document.getElementById("file");
+
+    document.body.addEventListener("dragover", (e) => {
+      e.preventDefault();
+    });
+
+    document.body.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        fileInput.files = files;
+      }
+    });
+  </script>
+</body>
+</html>
+
